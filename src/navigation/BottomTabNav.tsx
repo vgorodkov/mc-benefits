@@ -7,6 +7,7 @@ import { AccountScreen } from '@screens/AccountScreen';
 import { FavouritesScreen } from '@screens/FavouritesScreen';
 import { sizes, spacing } from 'constants/layout';
 import { MainStackNav } from './MainStackNav';
+import { NavHeader } from '@components/navigation/NavHeader';
 
 const ROUTE_LABELS: { [key: string]: string } = {
   [Route.MainStackNav]: 'Скидки',
@@ -43,7 +44,13 @@ export const BottomTabNav = () => {
         };
       }}
     >
-      <Tab.Screen name={Route.MainStackNav} component={MainStackNav} options={{}} />
+      <Tab.Screen
+        name={Route.MainStackNav}
+        component={MainStackNav}
+        options={{
+          header: () => <NavHeader />,
+        }}
+      />
       <Tab.Screen name={Route.Favourites} component={FavouritesScreen} />
       <Tab.Screen name={Route.Account} component={AccountScreen} />
     </Tab.Navigator>
