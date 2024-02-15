@@ -6,3 +6,8 @@ export enum Route {
   Category = 'Category',
   Benefit = 'Benefit',
 }
+
+export interface MainStackParamList {
+  [Route.Category]: { categoryId: number; categoryLabel: string };
+  [Route.Main]: undefined;
+}
