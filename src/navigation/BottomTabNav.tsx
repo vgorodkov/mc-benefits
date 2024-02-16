@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { Image, StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Route } from '@customTypes/navigation';
 import { TabBarIcon } from '@components/navigation/TabBarIcon';
@@ -8,18 +8,21 @@ import { FavouritesScreen } from '@screens/FavouritesScreen';
 import { sizes, spacing } from 'constants/layout';
 import { MainStackNav } from './MainStackNav';
 import { NavHeader } from '@components/navigation/NavHeader';
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
+import { BenefitHeader } from '@components/navigation/BenefitNavHeader';
+import { FavouritesStackNav } from './FavouriteStackNav';
 
 const ROUTE_LABELS: { [key: string]: string } = {
   [Route.MainStackNav]: 'Скидки',
   [Route.Account]: 'Аккаунт',
-  [Route.Favourites]: 'Избранное',
+  [Route.FavouritesStackNav]: 'Избранное',
 };
 
 const renderIcon = (route: string, focused: boolean) => {
   switch (route) {
     case Route.Account:
       return focused ? icons.active_user : icons.user;
-    case Route.Favourites:
+    case Route.FavouritesStackNav:
       return focused ? icons.actitve_heart_route : icons.heart_route;
     case Route.MainStackNav:
       return focused ? icons.active_sale_bar : icons.sale_bar;
@@ -48,11 +51,23 @@ export const BottomTabNav = () => {
         name={Route.MainStackNav}
         component={MainStackNav}
         options={{
-          header: () => <NavHeader />,
+          header: ({ route }) => {
+            const routeName = getFocusedRouteNameFromRoute(route);
+            return routeName === Route.Benefit ? <BenefitHeader /> : <NavHeader />;
+          },
         }}
       />
-      <Tab.Screen name={Route.Favourites} component={FavouritesScreen} />
-      <Tab.Screen name={Route.Account} component={AccountScreen} />
+      <Tab.Screen
+        name={Route.FavouritesStackNav}
+        component={FavouritesStackNav}
+        options={{
+          header: ({ route }) => {
+            const routeName = getFocusedRouteNameFromRoute(route);
+            return routeName === Route.Benefit ? <BenefitHeader /> : null;
+          },
+        }}
+      />
+      <Tab.Screen name={Route.Account} component={AccountScreen} options={{ headerShown: false }} />
     </Tab.Navigator>
   );
 };
