@@ -10,8 +10,13 @@ export enum Route {
   Benefit = 'Benefit',
 }
 
-export interface MainStackParamList {
+export type MainStackParamList = {
   [Route.Category]: { categoryId: number; categoryLabel: string };
   [Route.Main]: undefined;
   [Route.Benefit]: { benefit: Benefit };
-}
+};
+
+export type FavouritesStackParamList = {
+  [Route.Favourites]: undefined;
+  [Route.Benefit]: { benefit: Benefit };
+};
