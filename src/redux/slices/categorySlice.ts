@@ -19,7 +19,6 @@ export const categorySlice = createSlice({
   },
 });
 
-// Action creators are generated for each case reducer function
 export const { selectActiveCategory } = categorySlice.actions;
 
 export default categorySlice.reducer;

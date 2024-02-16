@@ -1,7 +1,5 @@
-import { benefits } from '@data/benefits';
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { Benefit } from '@types';
 
 export interface FavouritesState {
   favouritesIds: number[];
@@ -15,7 +13,7 @@ export const favouritesSlice = createSlice({
   name: 'favourites',
   initialState,
   reducers: {
-    addToFavourites: (state, action) => {
+    addToFavourites: (state, action: PayloadAction<number>) => {
       state.favouritesIds.push(action.payload);
     },
     removeFromFavourites: (state, action) => {
@@ -24,7 +22,6 @@ export const favouritesSlice = createSlice({
   },
 });
 
-// Action creators are generated for each case reducer function
 export const { addToFavourites, removeFromFavourites } = favouritesSlice.actions;
 
 export default favouritesSlice.reducer;
