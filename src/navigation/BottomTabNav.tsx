@@ -1,16 +1,16 @@
-import { Image, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Route } from '@customTypes/navigation';
 import { TabBarIcon } from '@components/navigation/TabBarIcon';
 import { icons } from '@assets/index';
 import { AccountScreen } from '@screens/AccountScreen';
-import { FavouritesScreen } from '@screens/FavouritesScreen';
+
 import { sizes, spacing } from 'constants/layout';
-import { MainStackNav } from './MainStackNav';
+import { MainStackNav } from '@navigation/MainStackNav';
 import { NavHeader } from '@components/navigation/NavHeader';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
-import { BenefitHeader } from '@components/navigation/BenefitNavHeader';
-import { FavouritesStackNav } from './FavouriteStackNav';
+
+import { FavouritesStackNav } from '@navigation/FavouritesStackNav';
 
 const ROUTE_LABELS: { [key: string]: string } = {
   [Route.MainStackNav]: 'Скидки',
@@ -53,19 +53,14 @@ export const BottomTabNav = () => {
         options={{
           header: ({ route }) => {
             const routeName = getFocusedRouteNameFromRoute(route);
-            return routeName === Route.Benefit ? <BenefitHeader /> : <NavHeader />;
+            return routeName === Route.Benefit ? null : <NavHeader />;
           },
         }}
       />
       <Tab.Screen
         name={Route.FavouritesStackNav}
         component={FavouritesStackNav}
-        options={{
-          header: ({ route }) => {
-            const routeName = getFocusedRouteNameFromRoute(route);
-            return routeName === Route.Benefit ? <BenefitHeader /> : null;
-          },
-        }}
+        options={{ headerShown: false }}
       />
       <Tab.Screen name={Route.Account} component={AccountScreen} options={{ headerShown: false }} />
     </Tab.Navigator>
