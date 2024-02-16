@@ -8,8 +8,12 @@ import { selectActiveCategory } from 'redux/slices/categorySlice';
 import { useDispatch } from 'react-redux';
 
 import { VerticalBenefitsList } from '@components/benefits/lists/VerticalBenefitsList';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { MainStackParamList, Route } from '@customTypes/navigation';
 
-export const CategoryScreen = ({ route }) => {
+type Props = NativeStackScreenProps<MainStackParamList, Route.Category>;
+
+export const CategoryScreen = ({ route }: Props) => {
   const { categoryLabel, categoryId } = route.params;
 
   const benefitsByCategory = benefits.categories.find((category) => category.id === categoryId);
