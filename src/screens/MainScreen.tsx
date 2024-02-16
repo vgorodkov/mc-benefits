@@ -1,14 +1,14 @@
-import { FlatList } from 'react-native';
+import { FlatList, StyleSheet } from 'react-native';
 import React, { useRef } from 'react';
+import { useFocusEffect, useScrollToTop } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
 
 import { benefits } from 'data/benefits';
 import { Category } from '@customTypes/benefits';
-
 import { BenefitsByCategoryList } from '@components/benefits/lists/BenefitsByCategoryList';
 import { NewBenefitsList } from '@components/benefits/lists/NewBenefitsList';
-import { useFocusEffect, useScrollToTop } from '@react-navigation/native';
-import { useDispatch } from 'react-redux';
 import { selectActiveCategory } from 'redux/slices/categorySlice';
+import { spacing } from '@constants/layout';
 
 export const MainScreen = () => {
   const benefitsByCategory = benefits.categories;
@@ -32,8 +32,12 @@ export const MainScreen = () => {
       ref={flatListRef}
       data={benefitsByCategory}
       renderItem={renderItem}
-      contentContainerStyle={{ gap: 32, paddingVertical: 24 }}
+      contentContainerStyle={styles.listContentContainer}
       ListHeaderComponent={() => <NewBenefitsList />}
     />
   );
 };
+
+const styles = StyleSheet.create({
+  listContentContainer: { gap: spacing.large, paddingVertical: spacing.medium },
+});
