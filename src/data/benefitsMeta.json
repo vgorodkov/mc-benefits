@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "label": "ODIN",
+    "labelColor": "black",
+    "offer": "-10% по промокоду"
+  },
+  {
+    "id": 2,
+    "label": "SpiritВar (СпиритБар)",
+    "labelColor": "white",
+    "offer": "Сет бесплатно"
+  },
+  {
+    "id": 3,
+    "label": "EMBARGO Coctail Bar",
+    "offer": "-10%"
+  },
+  {
+    "id": 4,
+    "label": "Мята-центр кальянная",
+    "offer": "−20% на кальяны"
+  },
+  {
+    "id": 5,
+    "label": "Доминос Пицца",
+    "offer": "-25%"
+  },
+  {
+    "id": 6,
+    "label": "EVO wellness club",
+    "offer": "−20%"
+  },
+  {
+    "id": 7,
+    "label": "VOKA центр микрохирургии глаза",
+    "offer": "-10%"
+  },
+  {
+    "id": 8,
+    "label": "Курсы иностранных языков SKYENG английский, немецкий...",
+    "offer": "до −45%"
+  },
+  {
+    "id": 9,
+    "label": "ROBOLAB Школа робототехники",
+    "offer": "-10%"
+  },
+  {
+    "id": 10,
+    "label": "FASOL музыкальная качалка",
+    "offer": "-30%"
+  },
+  {
+    "id": 11,
+    "label": "Online Class",
+    "offer": "-7%"
+  },
+  {
+    "id": 12,
+    "label": "Golden Apple",
+    "offer": "-7%"
+  },
+  {
+    "id": 13,
+    "label": "Korean Beauty",
+    "offer": "Получи подарок"
+  },
+  {
+    "id": 14,
+    "label": "Beat",
+    "offer": "-14% по промокоду"
+  },
+  {
+    "id": 15,
+    "label": "Adidas",
+    "offer": "-5%"
+  },
+  {
+    "id": 16,
+    "label": "Best Gym",
+    "offer": "Первый раз бесплатно"
+  },
+  {
+    "id": 17,
+    "label": "H&M",
+    "offer": "-19%"
+  },
+  {
+    "id": 18,
+    "label": "Zara",
+    "offer": "-13%"
+  },
+  {
+    "id": 19,
+    "label": "M00n",
+    "offer": "-35%"
+  },
+  {
+    "id": 20,
+    "label": "Бургер Кинг",
+    "offer": "-25%"
+  },
+  {
+    "id": 21,
+    "label": "Spotify",
+    "offer": "-7%"
+  },
+  {
+    "id": 22,
+    "label": "OrderUs",
+    "offer": "-50%"
+  },
+  {
+    "id": 23,
+    "label": "BilliardClub",
+    "offer": "-5%"
+  }
+]
