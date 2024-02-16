@@ -1,10 +1,12 @@
-import { StyleSheet, Image, View, Pressable } from 'react-native';
+import { StyleSheet, Image, Pressable } from 'react-native';
 import React from 'react';
 import { icons } from '@assets/index';
 import Animated, { FadeIn } from 'react-native-reanimated';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
+import { sizes, spacing } from '@constants/layout';
+import { animation } from '@constants/animation';
 
-export const BenefitHeader = () => {
+export const BenefitHeader = ({ isFavourite }: { isFavourite: boolean }) => {
   const navigation = useNavigation();
 
   const onBackBtnPress = () => {
@@ -12,12 +14,18 @@ export const BenefitHeader = () => {
   };
 
   return (
-    <Animated.View entering={FadeIn.delay(300)} style={styles.benefitHeaderContainer}>
+    <Animated.View
+      entering={FadeIn.delay(animation.default_duration)}
+      style={styles.benefitHeaderContainer}
+    >
       <Pressable onPress={onBackBtnPress} style={styles.benefitHeaderIconContainer}>
         <Image style={styles.benefitHeaderIcon} source={icons.arrow_left} />
       </Pressable>
       <Pressable style={styles.benefitHeaderIconContainer}>
-        <Image style={styles.benefitHeaderIcon} source={icons.heart} />
+        <Image
+          style={styles.benefitHeaderIcon}
+          source={isFavourite ? icons.active_heart : icons.heart}
+        />
       </Pressable>
     </Animated.View>
   );
@@ -29,18 +37,19 @@ const styles = StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    padding: 16,
+    padding: spacing.default,
+    zIndex: 1000,
   },
   benefitHeaderIconContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    width: 40,
-    height: 40,
+    width: sizes.iconContainer,
+    height: sizes.iconContainer,
     borderRadius: 100,
     backgroundColor: 'white',
   },
   benefitHeaderIcon: {
-    width: 24,
-    height: 24,
+    width: sizes.icon,
+    height: sizes.icon,
   },
 });
