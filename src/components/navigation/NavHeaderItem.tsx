@@ -3,11 +3,10 @@ import { Pressable, StyleSheet, Image } from 'react-native';
 import { Text } from '@components/common/Text';
 import { colors } from '@constants/colors';
 import { spacing } from '@constants/layout';
-import { useDispatch } from 'react-redux';
+
 import { icons } from '@assets/index';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { MainStackParamList, Route } from '@customTypes/navigation';
-import { selectActiveCategory } from 'redux/slices/categorySlice';
 
 const CATEGORY_IMG_SIZE = 20;
 
@@ -24,11 +23,9 @@ export const NavHeaderItem = memo(({ isActive = false, label, id }: NavHeaderCat
 
   const isAllSales = id === 0;
 
-  const dispatch = useDispatch();
   const navigation = useNavigation<NavigationProp<MainStackParamList>>();
 
   const onNavHeaderItemPress = () => {
-    dispatch(selectActiveCategory(id));
     if (isAllSales) {
       navigation.navigate(Route.Main);
     } else {
