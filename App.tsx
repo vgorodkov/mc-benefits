@@ -3,14 +3,18 @@ import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet } from 'react-native';
 import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { BottomTabNav } from 'navigation/BottomTabNav';
-import { colors } from '@constants/colors';
+import {
+  SafeAreaProvider,
+  SafeAreaView,
+  initialWindowMetrics,
+} from 'react-native-safe-area-context';
 import * as SplashScreen from 'expo-splash-screen';
 import { useFonts } from 'expo-font';
 import { useCallback } from 'react';
 import { Provider } from 'react-redux';
 import { store } from 'redux/store';
+import { BottomTabNav } from '@navigation/BottomTabNav';
+import { colors } from '@constants/colors';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -43,10 +47,12 @@ export default function App() {
   return (
     <NavigationContainer theme={customTheme}>
       <Provider store={store}>
-        <SafeAreaView style={styles.container} onLayout={onLayoutRootView}>
-          <StatusBar style="auto" />
-          <BottomTabNav />
-        </SafeAreaView>
+        <SafeAreaProvider initialMetrics={initialWindowMetrics}>
+          <SafeAreaView style={styles.container} onLayout={onLayoutRootView}>
+            <StatusBar style="auto" />
+            <BottomTabNav />
+          </SafeAreaView>
+        </SafeAreaProvider>
       </Provider>
     </NavigationContainer>
   );
