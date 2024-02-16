@@ -1,11 +1,12 @@
 import { ScrollView, StyleSheet, View } from 'react-native';
-import React from 'react';
+import React, { useRef } from 'react';
 import Animated, { FadeIn, FadeOut, LinearTransition } from 'react-native-reanimated';
 import { Benefit } from '@customTypes/benefits';
 import { BenefitItem } from '@components/benefits/item/BenefitItem';
 import { Text } from '@components/common/Text';
 import { spacing } from '@constants/layout';
 import { animation } from '@constants/animation';
+import { useScrollToTop } from '@react-navigation/native';
 
 interface VerticalBenefitsList {
   benefitsData: Benefit[];
@@ -13,12 +14,17 @@ interface VerticalBenefitsList {
 }
 
 export const VerticalBenefitsList = ({ benefitsData, categoryLabel }: VerticalBenefitsList) => {
+  const verticalBenefitsListRef = useRef<Animated.ScrollView>(null);
+
+  useScrollToTop(verticalBenefitsListRef);
+
   return (
     <View style={styles.container}>
       <Text style={styles.verticalBenefitsListTitle} variant="header_1">
         {categoryLabel}
       </Text>
-      <ScrollView
+      <Animated.ScrollView
+        ref={verticalBenefitsListRef}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.verticalBenefitsListContent}
       >
@@ -36,7 +42,7 @@ export const VerticalBenefitsList = ({ benefitsData, categoryLabel }: VerticalBe
             </Animated.View>
           );
         })}
-      </ScrollView>
+      </Animated.ScrollView>
     </View>
   );
 };
