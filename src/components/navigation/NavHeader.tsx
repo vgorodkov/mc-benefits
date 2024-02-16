@@ -1,17 +1,21 @@
-import { FlatList, StyleSheet, Text, View } from 'react-native';
-import React, { useMemo, useRef } from 'react';
-import { sizes, spacing } from '@constants/layout';
+import { FlatList, StyleSheet } from 'react-native';
+import React, { memo, useCallback, useMemo, useRef } from 'react';
+import { spacing } from '@constants/layout';
 import { colors } from '@constants/colors';
 import { benefits } from 'data/benefits';
 import { NavHeaderItem } from '@components/navigation/NavHeaderItem';
 import { useSelector } from 'react-redux';
 import { RootState } from 'redux/store';
-import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
+import Animated, { SlideInUp, SlideOutUp } from 'react-native-reanimated';
 
 interface Category {
   id: number;
   label: string;
 }
+
+const ListHeader = memo(({ isActive }: { isActive: boolean }) => {
+  return <NavHeaderItem id={0} label="Все скидки" isActive={isActive} />;
+});
 
 export const NavHeader = () => {
   const categories = useMemo(
@@ -27,25 +31,36 @@ export const NavHeader = () => {
 
   const activeCategoryId = useSelector((state: RootState) => state.category.activeCategoryId);
   const flatListRef = useRef<FlatList>(null);
+  const isAllSalesCategory = activeCategoryId === 0;
 
-  const scrollToItem = () => {
-    if (activeCategoryId > 0) {
+  const scrollToItem = useCallback(() => {
+    if (!isAllSalesCategory) {
       flatListRef.current?.scrollToIndex({ animated: true, index: activeCategoryId - 1 });
     } else {
-      flatListRef.current?.scrollToOffset({ animated: true, offset: 0 });
+      flatListRef.current?.scrollToOffset({
+        animated: true,
+        offset: -spacing.default,
+      });
     }
-  };
+  }, [activeCategoryId]);
 
-  const renderItem = ({ item }: { item: Category }) => {
-    return (
-      <NavHeaderItem id={item.id} label={item.label} isActive={activeCategoryId === item.id} />
-    );
-  };
+  const renderItem = useCallback(
+    ({ item }: { item: Category }) => {
+      return (
+        <NavHeaderItem id={item.id} label={item.label} isActive={activeCategoryId === item.id} />
+      );
+    },
+    [activeCategoryId],
+  );
+
+  const renderListHeader = useCallback(() => {
+    return <ListHeader isActive={isAllSalesCategory} />;
+  }, [isAllSalesCategory]);
 
   scrollToItem();
 
   return (
-    <Animated.View style={styles.navHeaderContainer} exiting={FadeOut} entering={FadeIn}>
+    <Animated.View style={styles.navHeaderContainer} exiting={SlideOutUp} entering={SlideInUp}>
       <FlatList
         ref={flatListRef}
         data={categories}
@@ -53,9 +68,7 @@ export const NavHeader = () => {
         horizontal
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.navHeaderListContent}
-        ListHeaderComponent={() => (
-          <NavHeaderItem id={0} label="Все скидки" isActive={activeCategoryId === 0} />
-        )}
+        ListHeaderComponent={renderListHeader}
       />
     </Animated.View>
   );
@@ -63,7 +76,7 @@ export const NavHeader = () => {
 
 const styles = StyleSheet.create({
   navHeaderContainer: {
-    height: sizes.navHeader,
+    paddingVertical: spacing.semidefault,
     borderBottomWidth: 1,
     borderBlockColor: colors.neutralGray,
   },
