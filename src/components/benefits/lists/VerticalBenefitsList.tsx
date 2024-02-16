@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import React from 'react';
 import Animated, { FadeIn, FadeOut, LinearTransition } from 'react-native-reanimated';
 import { Benefit } from '@customTypes/benefits';
@@ -13,31 +13,30 @@ interface VerticalBenefitsList {
 }
 
 export const VerticalBenefitsList = ({ benefitsData, categoryLabel }: VerticalBenefitsList) => {
-  const renderItem = ({ item, index }: { item: Benefit; index: number }) => {
-    return (
-      <Animated.View
-        entering={FadeIn.delay(
-          Math.min(index * animation.default_duration, animation.default_duration * 3),
-        )}
-        exiting={FadeOut}
-        layout={LinearTransition.delay(animation.default_duration)}
-      >
-        <BenefitItem benefit={item} variant="detailed" />
-      </Animated.View>
-    );
-  };
   return (
     <View style={styles.container}>
       <Text style={styles.verticalBenefitsListTitle} variant="header_1">
         {categoryLabel}
       </Text>
-      <Animated.FlatList
-        data={benefitsData}
-        itemLayoutAnimation={LinearTransition.delay(animation.default_duration)}
-        renderItem={renderItem}
-        contentContainerStyle={styles.verticalBenefitsListContent}
+      <ScrollView
         showsVerticalScrollIndicator={false}
-      />
+        contentContainerStyle={styles.verticalBenefitsListContent}
+      >
+        {benefitsData.map((item, index) => {
+          return (
+            <Animated.View
+              key={item.id}
+              entering={FadeIn.delay(
+                Math.min(index * animation.default_duration, animation.default_duration * 3),
+              )}
+              exiting={FadeOut}
+              layout={LinearTransition.delay(animation.default_duration)}
+            >
+              <BenefitItem benefit={item} variant="detailed" />
+            </Animated.View>
+          );
+        })}
+      </ScrollView>
     </View>
   );
 };
