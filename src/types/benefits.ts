@@ -13,8 +13,11 @@ export interface Benefit {
   id: number;
   label: string;
   labelColor?: string;
-  category: string;
   offer: string;
-  imgPath: string;
-  isNew?: boolean;
+}
+
+export interface Category {
+  id: number;
+  title: string;
+  benefitsIds: number[];
 }
