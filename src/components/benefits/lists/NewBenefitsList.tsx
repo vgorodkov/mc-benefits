@@ -1,4 +1,3 @@
-import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import benefitsMeta from 'data/benefitsMeta.json';
 import { Benefit } from '@customTypes/benefits';
@@ -16,5 +15,3 @@ export const NewBenefitsList = () => {
     <HorizontalBenefitsList benefitsData={benefitsData} benefitVariant="new" listTitle="Новинки" />
   );
 };
-
-const styles = StyleSheet.create({});
