@@ -30,7 +30,6 @@ export const CategoryScreen = ({ route }: Props) => {
 
   useFocusEffect(
     React.useCallback(() => {
-      dispatch(selectActiveCategory(categoryId));
       const onBackPress = () => {
         dispatch(selectActiveCategory(0));
         return false;
@@ -39,8 +38,12 @@ export const CategoryScreen = ({ route }: Props) => {
       const subscription = BackHandler.addEventListener('hardwareBackPress', onBackPress);
 
       return () => subscription.remove();
-    }, [categoryId]),
+    }, []),
   );
+
+  useFocusEffect(() => {
+    dispatch(selectActiveCategory(categoryId));
+  });
 
   if (isLoading) {
     return (
