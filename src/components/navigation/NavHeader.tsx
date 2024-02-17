@@ -1,5 +1,5 @@
 import { FlatList, StyleSheet } from 'react-native';
-import React, { memo, useCallback, useMemo, useRef } from 'react';
+import React, { memo, useCallback, useEffect, useMemo, useRef } from 'react';
 import { spacing } from '@constants/layout';
 import { colors } from '@constants/colors';
 import { benefits } from 'data/benefits';
@@ -57,7 +57,9 @@ export const NavHeader = () => {
     return <ListHeader isActive={isAllSalesCategory} />;
   }, [isAllSalesCategory]);
 
-  scrollToItem();
+  useEffect(() => {
+    scrollToItem();
+  }, [activeCategoryId]);
 
   return (
     <Animated.View style={styles.navHeaderContainer} exiting={SlideOutUp} entering={SlideInUp}>
